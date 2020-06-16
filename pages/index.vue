@@ -26,19 +26,24 @@ export default {
   components: {
     Logo
   },
-  async asyncData(context) {
-    let res = await context.$axios.post('/customer-service/customer/login', {
-      password: '888888',
-      username: '18925790439'
-    })
-    console.log(res)
-  },
+  async asyncData(context) {},
   mounted() {
-    // this.getDataList()
+    this.getDataList()
+    this.onLogin()
   },
   methods: {
     async getDataList() {
       let res = await this.$axios.get('/mobile/queryAllBanner')
+      console.log(res)
+    },
+    async onLogin() {
+      let res = await this.$axios.post({
+        url: '/customer/login',
+        data: {
+          username: '18925790439',
+          password: '888888'
+        }
+      })
       console.log(res)
     }
   }

@@ -72,31 +72,31 @@ export default {
   */
   axios: {
     proxy: true,
-    prefix: '/api/',
-    credentials: true
+    prefix: '192.168.103.121:8083', // baseURL
+    credentials: true,
   },
   proxy: {
-    '/api/': {
-      target: '192.168.103.121:8083',
+    '/api': {
+      target: '', // 代理地址
+      changeOrigin: true,
       pathRewrite: {
-        '^/api/': '/',
-        changeOrigin: true
+        '^/api': '192.168.103.121:8083', //将 /api 替换掉
       }
-    }
-  },
-  /*
-  ** Build configuration
-  */
-  build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
     },
-    postcss: [
-      require('postcss-px2rem')({
-        remUnit: 37.5
-      })
-    ],
+    /*
+    ** Build configuration
+    */
+    build: {
+      /*
+      ** You can extend webpack config here
+      */
+      extend(config, ctx) {
+      },
+      postcss: [
+        require('postcss-px2rem')({
+          remUnit: 37.5
+        })
+      ],
+    }
   }
 }
