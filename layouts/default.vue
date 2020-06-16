@@ -1,10 +1,31 @@
 <template>
   <div>
-    <nuxt />
+    <groupList class="content_box">
+      <!-- <nav-top /> -->
+      <nuxt />
+      <tab-bar />
+    </groupList>
   </div>
 </template>
 
+<script>
+import tabBar from '~/components/tabBar'
+import navTop from '~/components/navTop'
+import groupList from '~/components/groupList'
+export default {
+  components: {
+    tabBar,
+    navTop,
+    groupList
+  }
+}
+</script>
+
 <style>
+.content_box {
+  padding-bottom: 50px;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;

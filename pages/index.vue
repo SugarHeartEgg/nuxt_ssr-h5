@@ -2,14 +2,10 @@
   <div class="container">
     <div>
       <!-- <logo /> -->
-      <h4 class="title">candee_ssr_h5</h4>
-      <h2 class="subtitle">this is candee h5 ssr project</h2>
       <div class="box">
         <div>测试px2 是否有用</div>
         <div>测试px2 是否有用</div>
         <div>测试px2 是否有用</div>
-        <div>测试px2 是否有用</div>
-
         <div class="son">
           <van-button>tick</van-button>
           <van-button type="warning">tick</van-button>
@@ -30,11 +26,15 @@ export default {
   components: {
     Logo
   },
-  asyncData(context) {
-    console.log(context)
+  async asyncData(context) {
+    let res = await context.$axios.post('/customer-service/customer/login', {
+      password: '888888',
+      username: '18925790439'
+    })
+    console.log(res)
   },
   mounted() {
-    this.getDataList()
+    // this.getDataList()
   },
   methods: {
     async getDataList() {

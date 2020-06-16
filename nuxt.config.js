@@ -14,6 +14,8 @@ export default {
 
       // 禁止用户缩放屏幕
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
+      // 禁止用户调起电话
+      { name: 'format-detection', content: 'telephone=no' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
@@ -46,6 +48,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/axios',
     '~plugins/vant.js',
     '~/plugins/route'
   ],
@@ -60,6 +63,8 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    // Simple usage
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration
@@ -72,7 +77,7 @@ export default {
   },
   proxy: {
     '/api/': {
-      target: 'https://f.brandest.cc',// 这个网站是开源的可以请求到数据的
+      target: '192.168.103.121:8083',
       pathRewrite: {
         '^/api/': '/',
         changeOrigin: true
