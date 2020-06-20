@@ -39,10 +39,12 @@ export default {
   ** Global CSS
   */
   css: [
+    // iconfont 
+    '~/assets/css/candeeIcon.css',
     // 项目里要用的 CSS 文件
-    '@/assets/css/main.css',
+    '~/assets/css/main.css',
     // 项目里要使用的 SCSS 文件
-    '@/assets/css/main.scss'
+    '~/assets/css/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -50,7 +52,6 @@ export default {
   plugins: [
     '~plugins/axios',
     '~plugins/vant.js',
-    '~/plugins/route'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -63,7 +64,10 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    // '@nuxtjs/proxy',  // 添加proxy模块
+    
     // Simple usage
+    // Doc: https://www.npmjs.com/package/cookie-universal-nuxt
     'cookie-universal-nuxt'
   ],
   /*
@@ -71,32 +75,43 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    proxy: true,
-    prefix: '192.168.103.121:8083', // baseURL
-    credentials: true,
+    // proxy: true  // 开启proxy
   },
-  proxy: {
-    '/api': {
-      target: '', // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api': '192.168.103.121:8083', //将 /api 替换掉
-      }
-    },
-    /*
-    ** Build configuration
-    */
-    build: {
-      /*
-      ** You can extend webpack config here
-      */
-      extend(config, ctx) {
-      },
-      postcss: [
-        require('postcss-px2rem')({
-          remUnit: 37.5
-        })
-      ],
+
+
+  /*
+  ** router module configuration
+  ** See https://www.nuxtjs.cn/api/configuration-router
+  */
+  router: {
+    // 路由根目录 重定向到home
+    extendRoutes(routes, resolve) {
+      routes.unshift({
+        path: '/',
+        redirect: '/home'
+      })
     }
+  },
+
+  proxy: {
+    // '/api': {
+    //   target: '192.168.103.121:8083',  // api请求路径
+    //   pathRewrite: { '^/api': '/' }  // 重定向请求路径，防止路由、api路径的冲突
+    // }
+  },
+  /*
+  ** Build configuration
+  */
+  build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend(config, ctx) {
+    },
+    postcss: {
+      plugins: [
+        require('postcss-px2rem')({ remUnit: 37.5 }), // 换算的基数
+      ]
+    },
   }
 }

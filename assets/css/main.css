@@ -1,5 +1,4 @@
-::-webkit-scrollbar {
-  display: none !important;
-  width: 0px;
-  height: 0px;
+i {
+  /* 初始化i标签的斜体样式，不然会影响到iconfont引入的样式 */
+  font-style: normal;
 }
